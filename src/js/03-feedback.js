@@ -21,15 +21,16 @@ function onFormSubmit(e) {
     localStorage.removeItem(STORAGE_KEY);
     console.log(formData);
 }
-function onTextAreaInput(e) {
-    formData[e.target.name] = e.target.value;
+function onTextAreaInput() {
+    formData.email = refs.inputMail.value;
+    formData.message = refs.textArea.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 function populateTextArea() {
     const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY))
-    if (savedMessage === null) {
-        return;
+    if (savedMessage) {
+        refs.inputMail.value = savedMessage.email;
+        refs.textArea.value = savedMessage.message;
     }
-        refs.textArea.value = savedMessage['message' || ''];
-        refs.inputMail.value = savedMessage['email' || ''];
+    // console.log(savedMessage)     
 }
